@@ -1,0 +1,38 @@
+{
+  "root": true,
+  "extends": "eslint:recommended",
+  "env": {
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 5,
+    "sourceType": "commonjs"
+  },
+  "rules": {
+    "array-callback-return": ["error", { "checkForEach": true }],
+    "block-scoped-var": ["error"],
+    "consistent-return": ["error"],
+    "curly": ["error", "multi-line", "consistent"],
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "no-constant-binary-expression": ["error"],
+    "no-else-return": ["error", { "allowElseIf": false }],
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-extra-boolean-cast": ["error", { "enforceForLogicalOperands": true }],
+    "no-invalid-this": ["error"],
+    "no-lone-blocks": ["error"],
+    "no-lonely-if": ["error"],
+    "no-loop-func": ["error"],
+    "no-param-reassign": ["error"],
+    "no-self-compare": ["error"],
+    "no-sequences": ["error"],
+    "no-shadow": ["error", { "builtinGlobals": true }],
+    "no-unmodified-loop-condition": ["error"],
+    "no-unneeded-ternary": ["error", { "defaultAssignment": false }],
+    "no-unreachable-loop": ["error"],
+    "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
+    "no-use-before-define": ["error", "nofunc"],
+    "no-useless-return": ["error"],
+    "strict": ["error"]
+  },
+  "noInlineConfig": true
+}

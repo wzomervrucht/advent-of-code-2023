@@ -1,0 +1,10 @@
+{
+  "name": "advent-of-code-2023",
+  "version": "1.0.0",
+  "author": "Wouter Zomervrucht",
+  "type": "commonjs",
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "prettier": "^3.1.0"
+  }
+}
