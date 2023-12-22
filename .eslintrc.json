@@ -30,7 +30,6 @@
     "no-unneeded-ternary": ["error", { "defaultAssignment": false }],
     "no-unreachable-loop": ["error"],
     "no-unused-expressions": ["error", { "allowShortCircuit": true, "allowTernary": true }],
-    "no-use-before-define": ["error", "nofunc"],
     "no-useless-return": ["error"],
     "strict": ["error"]
   },
