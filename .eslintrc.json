@@ -14,6 +14,7 @@
     "consistent-return": ["error"],
     "curly": ["error", "multi-line", "consistent"],
     "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "no-bitwise": ["error"],
     "no-constant-binary-expression": ["error"],
     "no-else-return": ["error", { "allowElseIf": false }],
     "no-empty": ["error", { "allowEmptyCatch": true }],
