@@ -13,8 +13,8 @@ function getInput(file) {
 }
 
 try {
-  var puzzle = require("./puzzles/01/trebuchet.js");
-  var input = getInput("./puzzles/01/trebuchet.txt");
+  var puzzle = require("./puzzles/02/cube-conundrum.js");
+  var input = getInput("./puzzles/02/cube-conundrum.txt");
   console.log("Part 1: " + (puzzle.solve1(input) || "-"));
   console.log("Part 2: " + (puzzle.solve2(input) || "-"));
 } catch (error) {
