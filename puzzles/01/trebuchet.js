@@ -4,17 +4,10 @@ var assert = require("../common/assert");
 var arr = require("../common/arrays");
 var num = require("../common/numbers");
 
-function validate(input, config) {
-  input.forEach(function (line) {
-    config && config.allowWrittenOnly
-      ? assert(regex.test(line), "Each line should contain a numeric or written digit.")
-      : assert(/\d/.test(line), "Each line should contain a numeric digit.");
-  });
-}
-
 function solve1(input) {
   var values = input.map(function (line) {
-    var digits = line.match(/\d/g).map(num.parse);
+    var digits = (line.match(/\d/g) || []).map(num.parse);
+    assert(digits.length, "Each line should contain a numeric digit.");
     return 10 * arr.first(digits) + arr.last(digits);
   });
   return num.sum(values);
@@ -23,6 +16,7 @@ function solve1(input) {
 function solve2(input) {
   var values = input.map(function (line) {
     var digits = findDigits(line);
+    assert(digits.length, "Each line should contain a numeric or written digit.");
     return 10 * arr.first(digits) + arr.last(digits);
   });
   return num.sum(values);
@@ -50,7 +44,6 @@ var regex = new RegExp("\\d|" + written.join("|"));
 module.exports = {
   day: 1,
   title: "Trebuchet?!",
-  validate: validate,
   solve1: solve1,
   solve2: solve2,
   input: "trebuchet.txt",
@@ -58,6 +51,6 @@ module.exports = {
   answer2: 54581,
   tests: [
     { input: "test1.txt", answer1: 142 },
-    { input: "test2.txt", config: { allowWrittenOnly: true }, answer2: 281 }
+    { input: "test2.txt", answer2: 281 }
   ]
 };
