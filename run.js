@@ -2,13 +2,13 @@
 
 var fs = require("fs");
 var assert = require("./puzzles/common/assert");
-var str = require("./puzzles/common/strings");
+var utils = require("./puzzles/common/utils");
 
 function getInput(file) {
   var input = fs.readFileSync(file, { encoding: "utf8" });
   assert(typeof input === "string", "Input should be a string.");
-  assert(!str.includes(input, "\r"), "Input should have LF line endings.");
-  assert(str.last(input) === "\n", "Input should have a final newline.");
+  assert(!utils.includes(input, "\r"), "Input should have LF line endings.");
+  assert(utils.last(input) === "\n", "Input should have a final newline.");
   return input.slice(0, -1).split("\n");
 }
 

@@ -1,25 +1,24 @@
 "use strict";
 
 var assert = require("../common/assert");
-var arr = require("../common/arrays");
-var num = require("../common/numbers");
+var utils = require("../common/utils");
 
 function solve1(input) {
   var values = input.map(function (line) {
-    var digits = (line.match(/\d/g) || []).map(num.parse);
+    var digits = (line.match(/\d/g) || []).map(utils.parse);
     assert(digits.length, "Each line should contain a numeric digit.");
-    return 10 * arr.first(digits) + arr.last(digits);
+    return 10 * utils.first(digits) + utils.last(digits);
   });
-  return num.sum(values);
+  return utils.sum(values);
 }
 
 function solve2(input) {
   var values = input.map(function (line) {
     var digits = findDigits(line);
     assert(digits.length, "Each line should contain a numeric or written digit.");
-    return 10 * arr.first(digits) + arr.last(digits);
+    return 10 * utils.first(digits) + utils.last(digits);
   });
-  return num.sum(values);
+  return utils.sum(values);
 }
 
 function findDigits(line) {
@@ -35,7 +34,7 @@ function findDigits(line) {
 }
 
 function parseDigit(digit) {
-  return written.indexOf(digit) + 1 || num.parse(digit);
+  return written.indexOf(digit) + 1 || utils.parse(digit);
 }
 
 var written = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
