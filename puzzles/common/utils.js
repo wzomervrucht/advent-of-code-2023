@@ -4,6 +4,10 @@ function first(iterable) {
   return iterable[0];
 }
 
+function flat(array) {
+  return Array.prototype.concat.apply([], array);
+}
+
 function getProperty(key) {
   return function (object) {
     return object[key];
@@ -14,8 +18,24 @@ function includes(iterable, value) {
   return iterable.indexOf(value) !== -1;
 }
 
+function isRectangular(grid) {
+  return grid.every(function (row) {
+    return row.length === grid[0].length;
+  });
+}
+
 function last(iterable) {
   return iterable[iterable.length - 1];
+}
+
+function matchAll(string, regex) {
+  var matches = [];
+  var match = regex.exec(string);
+  while (match) {
+    matches.push(match);
+    match = regex.exec(string);
+  }
+  return matches;
 }
 
 function max(values) {
@@ -38,9 +58,12 @@ function sum(values) {
 
 module.exports = {
   first: first,
+  flat: flat,
   getProperty: getProperty,
   includes: includes,
+  isRectangular: isRectangular,
   last: last,
+  matchAll: matchAll,
   max: max,
   min: min,
   parse: parse,
