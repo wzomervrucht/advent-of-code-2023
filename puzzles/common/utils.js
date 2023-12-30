@@ -1,5 +1,11 @@
 "use strict";
 
+function constant(value) {
+  return function () {
+    return value;
+  };
+}
+
 function first(iterable) {
   return iterable[0];
 }
@@ -57,6 +63,7 @@ function sum(values) {
 }
 
 module.exports = {
+  constant: constant,
   first: first,
   flat: flat,
   getProperty: getProperty,
