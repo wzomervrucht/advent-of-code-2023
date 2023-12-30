@@ -1,7 +1,7 @@
 "use strict";
 
 function assume(assumption, message) {
-  !assumption && assume.fail(message);
+  assumption || assume.fail(message);
 }
 
 assume.fail = function (message) {

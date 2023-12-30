@@ -1,7 +1,7 @@
 "use strict";
 
 function assert(assertion, message) {
-  !assertion && assert.fail(message);
+  assertion || assert.fail(message);
 }
 
 assert.fail = function (message) {

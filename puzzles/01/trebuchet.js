@@ -6,7 +6,7 @@ var utils = require("../common/utils");
 function solve1(input) {
   var values = input.map(function (line) {
     var digits = (line.match(/\d/g) || []).map(utils.parse);
-    assert(digits.length, "Each line should contain a numeric digit.");
+    assert(digits.length);
     return 10 * utils.first(digits) + utils.last(digits);
   });
   return utils.sum(values);
@@ -15,7 +15,7 @@ function solve1(input) {
 function solve2(input) {
   var values = input.map(function (line) {
     var digits = findDigits(line);
-    assert(digits.length, "Each line should contain a numeric or written digit.");
+    assert(digits.length);
     return 10 * utils.first(digits) + utils.last(digits);
   });
   return utils.sum(values);

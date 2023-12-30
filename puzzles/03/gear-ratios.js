@@ -4,7 +4,7 @@ var assert = require("../common/assert");
 var utils = require("../common/utils");
 
 function solve1(input) {
-  assert(utils.isRectangular(input), "Input grid should be rectangular.");
+  assert(utils.isRectangular(input));
   var numbers = utils.flat(input.map(findNumbers));
   var symbols = utils.flat(input.map(findSymbols));
   var partNumbers = numbers.filter(hasAdjacentSymbol(symbols)).map(utils.getProperty("value"));
@@ -12,7 +12,7 @@ function solve1(input) {
 }
 
 function solve2(input) {
-  assert(utils.isRectangular(input), "Input grid should be rectangular.");
+  assert(utils.isRectangular(input));
   var numbers = utils.flat(input.map(findNumbers));
   var asterisks = utils.flat(input.map(findAsterisks));
   var gearRatios = asterisks.map(getAdjacentNumbers(numbers)).map(getGearRatio);

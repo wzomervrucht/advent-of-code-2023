@@ -16,7 +16,7 @@ function solve2(input) {
 }
 
 function parseGame(line) {
-  assert(regex.test(line), "Each line should be formatted correctly.");
+  assert(regex.test(line));
   return {
     id: utils.parse(line.match(/\d+/)[0]),
     red: utils.max((line.match(/\d+ red/g) || []).map(utils.parse).concat(0)),
