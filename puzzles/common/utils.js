@@ -18,9 +18,9 @@ function includes(iterable, value) {
   return iterable.indexOf(value) !== -1;
 }
 
-function isRectangular(grid) {
-  return grid.every(function (row) {
-    return row.length === grid[0].length;
+function isRectangular(array) {
+  return array.every(function (row) {
+    return row.length === array[0].length;
   });
 }
 

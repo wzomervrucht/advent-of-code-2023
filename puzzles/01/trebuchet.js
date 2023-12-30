@@ -1,24 +1,24 @@
 "use strict";
 
 var assert = require("../common/assert");
-var utils = require("../common/utils");
+var _ = require("../common/utils");
 
 function solve1(input) {
   var values = input.map(function (line) {
-    var digits = (line.match(/\d/g) || []).map(utils.parse);
+    var digits = (line.match(/\d/g) || []).map(_.parse);
     assert(digits.length);
-    return 10 * utils.first(digits) + utils.last(digits);
+    return 10 * _.first(digits) + _.last(digits);
   });
-  return utils.sum(values);
+  return _.sum(values);
 }
 
 function solve2(input) {
   var values = input.map(function (line) {
     var digits = findDigits(line);
     assert(digits.length);
-    return 10 * utils.first(digits) + utils.last(digits);
+    return 10 * _.first(digits) + _.last(digits);
   });
-  return utils.sum(values);
+  return _.sum(values);
 }
 
 function findDigits(line) {
@@ -34,7 +34,7 @@ function findDigits(line) {
 }
 
 function parseDigit(digit) {
-  return written.indexOf(digit) + 1 || utils.parse(digit);
+  return written.indexOf(digit) + 1 || _.parse(digit);
 }
 
 var written = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];

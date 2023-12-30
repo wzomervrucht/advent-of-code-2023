@@ -1,27 +1,27 @@
 "use strict";
 
 var assert = require("../common/assert");
-var utils = require("../common/utils");
+var _ = require("../common/utils");
 
 function solve1(input) {
   var games = input.map(parseGame);
-  var ids = games.filter(isPossible).map(utils.getProperty("id"));
-  return utils.sum(ids);
+  var ids = games.filter(isPossible).map(_.getProperty("id"));
+  return _.sum(ids);
 }
 
 function solve2(input) {
   var games = input.map(parseGame);
   var powers = games.map(getPower);
-  return utils.sum(powers);
+  return _.sum(powers);
 }
 
 function parseGame(line) {
   assert(regex.test(line));
   return {
-    id: utils.parse(line.match(/\d+/)[0]),
-    red: utils.max((line.match(/\d+ red/g) || []).map(utils.parse).concat(0)),
-    green: utils.max((line.match(/\d+ green/g) || []).map(utils.parse).concat(0)),
-    blue: utils.max((line.match(/\d+ blue/g) || []).map(utils.parse).concat(0))
+    id: _.parse(line.match(/\d+/)[0]),
+    red: _.max((line.match(/\d+ red/g) || []).map(_.parse).concat(0)),
+    green: _.max((line.match(/\d+ green/g) || []).map(_.parse).concat(0)),
+    blue: _.max((line.match(/\d+ blue/g) || []).map(_.parse).concat(0))
   };
 }
 
