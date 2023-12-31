@@ -12,14 +12,14 @@ function solve1(input) {
 function solve2(input) {
   var cards = input.map(parseCard);
   var matches = cards.map(countMatches);
-  var counts = cards.map(_.constant(1));
+  var copies = cards.map(_.constant(1));
   for (var i = 0; i < cards.length; i++) {
     assert(i + matches[i] < cards.length);
     for (var j = i + 1; j <= i + matches[i]; j++) {
-      counts[j] += counts[i];
+      copies[j] += copies[i];
     }
   }
-  return _.sum(counts);
+  return _.sum(copies);
 }
 
 function parseCard(line) {

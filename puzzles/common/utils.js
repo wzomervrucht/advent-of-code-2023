@@ -1,9 +1,26 @@
 "use strict";
 
+function chunk(array, size) {
+  var chunks = [];
+  var index = 0;
+  while (index < array.length) {
+    chunks.push(array.slice(index, index + size));
+    index += size;
+  }
+  return chunks;
+}
+
 function constant(value) {
   return function () {
     return value;
   };
+}
+
+function findIndex(array, callback) {
+  for (var i = 0; i < array.length; i++) {
+    if (callback(array[i])) return i;
+  }
+  return -1;
 }
 
 function first(iterable) {
@@ -56,6 +73,25 @@ function parse(value) {
   return parseInt(value);
 }
 
+function sort(array, callback) {
+  array.sort(function (a, b) {
+    return callback(a) - callback(b);
+  });
+}
+
+function split(array, value) {
+  var chunks = [];
+  var from = 0;
+  var index = array.indexOf(value);
+  while (index !== -1) {
+    chunks.push(array.slice(from, index));
+    from = index + 1;
+    index = array.indexOf(value, from);
+  }
+  chunks.push(array.slice(from));
+  return chunks;
+}
+
 function sum(values) {
   return values.reduce(function (x, y) {
     return x + y;
@@ -63,7 +99,9 @@ function sum(values) {
 }
 
 module.exports = {
+  chunk: chunk,
   constant: constant,
+  findIndex: findIndex,
   first: first,
   flat: flat,
   getProperty: getProperty,
@@ -74,5 +112,7 @@ module.exports = {
   max: max,
   min: min,
   parse: parse,
+  sort: sort,
+  split: split,
   sum: sum
 };

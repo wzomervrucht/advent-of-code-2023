@@ -11,8 +11,8 @@ function getInput(file) {
 }
 
 try {
-  var puzzle = require("./puzzles/04/scratchcards.js");
-  var input = getInput("./puzzles/04/scratchcards.txt");
+  var puzzle = require("./puzzles/05/if-you-give-a-seed-a-fertilizer.js");
+  var input = getInput("./puzzles/05/if-you-give-a-seed-a-fertilizer.txt");
   console.log("Part 1: " + puzzle.solve1(input));
   console.log("Part 2: " + puzzle.solve2(input));
 } catch (error) {
