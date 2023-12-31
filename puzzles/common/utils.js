@@ -1,15 +1,5 @@
 "use strict";
 
-function chunk(array, size) {
-  var chunks = [];
-  var index = 0;
-  while (index < array.length) {
-    chunks.push(array.slice(index, index + size));
-    index += size;
-  }
-  return chunks;
-}
-
 function constant(value) {
   return function () {
     return value;
@@ -99,7 +89,6 @@ function sum(values) {
 }
 
 module.exports = {
-  chunk: chunk,
   constant: constant,
   findIndex: findIndex,
   first: first,

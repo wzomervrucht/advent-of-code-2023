@@ -27,9 +27,11 @@ function parseSeeds(lines) {
 function parseSeedRanges(lines) {
   assert(lines.length === 1 && regex.test(lines[0]));
   var numbers = lines[0].match(/\d+/g).map(_.parse);
-  return _.chunk(numbers, 2).map(function (range) {
-    return { start: range[0], end: range[0] + range[1] };
-  });
+  var ranges = [];
+  for (var i = 0; i < numbers.length; i += 2) {
+    ranges.push({ start: numbers[i], end: numbers[i] + numbers[i + 1] });
+  }
+  return ranges;
 }
 
 function parseMap(lines) {
@@ -66,20 +68,20 @@ function mapItems(items, map) {
 }
 
 function mapRanges(ranges, map) {
-  var result = [];
+  var mappedRanges = [];
   ranges.forEach(function (range) {
     var i = _.findIndex(map, function (m) {
       return range.start < m.end;
     });
     while (map[i] && map[i].start < range.end) {
-      result.push({
+      mappedRanges.push({
         start: Math.max(map[i].start, range.start) + map[i].offset,
         end: Math.min(map[i].end, range.end) + map[i].offset
       });
       i++;
     }
   });
-  return result;
+  return mappedRanges;
 }
 
 var regex = /^seeds:(?: \d+ \d+)+$/;

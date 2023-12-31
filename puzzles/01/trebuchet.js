@@ -22,6 +22,7 @@ function solve2(input) {
 }
 
 function findDigits(line) {
+  // a global regex would miss overlapping matches
   var digits = [];
   var from = 0;
   var match = line.match(regex);
