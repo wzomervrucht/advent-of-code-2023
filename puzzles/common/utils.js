@@ -1,5 +1,11 @@
 "use strict";
 
+function apply(func, object) {
+  return function (args) {
+    return func.apply(object, args);
+  };
+}
+
 function constant(value) {
   return function () {
     return value;
@@ -29,6 +35,10 @@ function getProperty(key) {
 
 function includes(iterable, value) {
   return iterable.indexOf(value) !== -1;
+}
+
+function isInteger(value) {
+  return Math.round(value) === value;
 }
 
 function isRectangular(array) {
@@ -63,6 +73,12 @@ function parse(value) {
   return parseInt(value);
 }
 
+function product(values) {
+  return values.reduce(function (x, y) {
+    return x * y;
+  }, 1);
+}
+
 function sort(array, callback) {
   array.sort(function (a, b) {
     return callback(a) - callback(b);
@@ -88,20 +104,34 @@ function sum(values) {
   }, 0);
 }
 
+function zip() {
+  var arrays = Array.prototype.slice.apply(arguments);
+  var length = max(arrays.map(getProperty("length")));
+  var zipped = [];
+  for (var i = 0; i < length; i++) {
+    zipped.push(arrays.map(getProperty(i)));
+  }
+  return zipped;
+}
+
 module.exports = {
+  apply: apply,
   constant: constant,
   findIndex: findIndex,
   first: first,
   flat: flat,
   getProperty: getProperty,
   includes: includes,
+  isInteger: isInteger,
   isRectangular: isRectangular,
   last: last,
   matchAll: matchAll,
   max: max,
   min: min,
   parse: parse,
+  product: product,
   sort: sort,
   split: split,
-  sum: sum
+  sum: sum,
+  zip: zip
 };
