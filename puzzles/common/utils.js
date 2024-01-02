@@ -12,6 +12,18 @@ function constant(value) {
   };
 }
 
+function difference(array, values) {
+  return array.filter(function (value) {
+    return values.indexOf(value) === -1;
+  });
+}
+
+function distinct(array) {
+  return array.filter(function (value, index) {
+    return array.indexOf(value) === index;
+  });
+}
+
 function findIndex(array, callback) {
   for (var i = 0; i < array.length; i++) {
     if (callback(array[i])) return i;
@@ -35,6 +47,12 @@ function getProperty(key) {
 
 function includes(iterable, value) {
   return iterable.indexOf(value) !== -1;
+}
+
+function isEqual(value) {
+  return function (other) {
+    return value === other;
+  };
 }
 
 function isInteger(value) {
@@ -104,6 +122,10 @@ function sum(values) {
   }, 0);
 }
 
+function toArray(string) {
+  return string.split("");
+}
+
 function zip() {
   var arrays = Array.prototype.slice.apply(arguments);
   var length = max(arrays.map(getProperty("length")));
@@ -117,11 +139,14 @@ function zip() {
 module.exports = {
   apply: apply,
   constant: constant,
+  difference: difference,
+  distinct: distinct,
   findIndex: findIndex,
   first: first,
   flat: flat,
   getProperty: getProperty,
   includes: includes,
+  isEqual: isEqual,
   isInteger: isInteger,
   isRectangular: isRectangular,
   last: last,
@@ -133,5 +158,6 @@ module.exports = {
   sort: sort,
   split: split,
   sum: sum,
+  toArray: toArray,
   zip: zip
 };
