@@ -8,7 +8,9 @@ function solve1(input) {
   var times = input[0].match(/\d+/g).map(_.parse);
   var distances = input[1].match(/\d+/g).map(_.parse);
   assert(times.length === distances.length);
-  var options = _.zip(times, distances).map(_.apply(countOptions));
+  var options = times.map(function (time, i) {
+    return countOptions(time, distances[i]);
+  });
   return _.product(options);
 }
 

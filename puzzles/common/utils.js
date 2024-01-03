@@ -1,11 +1,5 @@
 "use strict";
 
-function apply(func, object) {
-  return function (args) {
-    return func.apply(object, args);
-  };
-}
-
 function constant(value) {
   return function () {
     return value;
@@ -126,18 +120,7 @@ function toArray(string) {
   return string.split("");
 }
 
-function zip() {
-  var arrays = Array.prototype.slice.apply(arguments);
-  var length = max(arrays.map(getProperty("length")));
-  var zipped = [];
-  for (var i = 0; i < length; i++) {
-    zipped.push(arrays.map(getProperty(i)));
-  }
-  return zipped;
-}
-
 module.exports = {
-  apply: apply,
   constant: constant,
   difference: difference,
   distinct: distinct,
@@ -158,6 +141,5 @@ module.exports = {
   sort: sort,
   split: split,
   sum: sum,
-  toArray: toArray,
-  zip: zip
+  toArray: toArray
 };
