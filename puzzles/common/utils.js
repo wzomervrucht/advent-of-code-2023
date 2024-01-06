@@ -25,6 +25,16 @@ function distinct(array) {
   });
 }
 
+function evaluate(object) {
+  return function (key) {
+    return object[key];
+  };
+}
+
+function find(array, callback) {
+  return array[findIndex(array, callback)];
+}
+
 function findIndex(array, callback) {
   for (var i = 0; i < array.length; i++) {
     if (callback(array[i])) {
@@ -40,6 +50,15 @@ function first(iterable) {
 
 function flat(array) {
   return Array.prototype.concat.apply([], array);
+}
+
+function gcd() {
+  var values = sort(args(arguments));
+  while (values.length > 1) {
+    var r = values.pop() % values[0];
+    r && values.unshift(r);
+  }
+  return values[0];
 }
 
 function getProperty(key) {
@@ -68,8 +87,18 @@ function isRectangular(array) {
   });
 }
 
+function keys(object) {
+  return Object.keys(object);
+}
+
 function last(iterable) {
   return iterable[iterable.length - 1];
+}
+
+function lcm() {
+  return args(arguments).reduce(function (x, y) {
+    return (x * y) / gcd(x, y);
+  });
 }
 
 function matchAll(string, regex) {
@@ -101,8 +130,8 @@ function product(values) {
 }
 
 function sort(array, callback) {
-  array.sort(function (a, b) {
-    return callback(a) - callback(b);
+  return array.sort(function (a, b) {
+    return callback ? callback(a) - callback(b) : a - b;
   });
 }
 
@@ -133,15 +162,20 @@ module.exports = {
   constant: constant,
   difference: difference,
   distinct: distinct,
+  evaluate: evaluate,
+  find: find,
   findIndex: findIndex,
   first: first,
   flat: flat,
+  gcd: gcd,
   getProperty: getProperty,
   includes: includes,
   isEqual: isEqual,
   isInteger: isInteger,
   isRectangular: isRectangular,
+  keys: keys,
   last: last,
+  lcm: lcm,
   matchAll: matchAll,
   max: max,
   min: min,

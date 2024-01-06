@@ -11,8 +11,8 @@ function getInput(file) {
 }
 
 try {
-  var puzzle = require("./puzzles/07/camel-cards.js");
-  var input = getInput("./puzzles/07/camel-cards.txt");
+  var puzzle = require("./puzzles/08/haunted-wasteland.js");
+  var input = getInput("./puzzles/08/haunted-wasteland.txt");
   console.log("Part 1: " + puzzle.solve1(input));
   console.log("Part 2: " + puzzle.solve2(input));
 } catch (error) {
