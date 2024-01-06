@@ -1,5 +1,12 @@
 "use strict";
 
+function args(values) {
+  if (values.length === 1 && Array.isArray(values[0])) {
+    return values[0];
+  }
+  return Array.prototype.slice.apply(values);
+}
+
 function constant(value) {
   return function () {
     return value;
@@ -75,12 +82,12 @@ function matchAll(string, regex) {
   return matches;
 }
 
-function max(values) {
-  return Math.max.apply(Math, values);
+function max() {
+  return Math.max.apply(Math, args(arguments));
 }
 
-function min(values) {
-  return Math.min.apply(Math, values);
+function min() {
+  return Math.min.apply(Math, args(arguments));
 }
 
 function parse(value) {

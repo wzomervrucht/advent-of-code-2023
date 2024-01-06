@@ -75,8 +75,8 @@ function mapRanges(ranges, map) {
     });
     while (map[i] && map[i].start < range.end) {
       mappedRanges.push({
-        start: Math.max(map[i].start, range.start) + map[i].offset,
-        end: Math.min(map[i].end, range.end) + map[i].offset
+        start: _.max(map[i].start, range.start) + map[i].offset,
+        end: _.min(map[i].end, range.end) + map[i].offset
       });
       i++;
     }
