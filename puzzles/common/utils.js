@@ -67,6 +67,10 @@ function getProperty(key) {
   };
 }
 
+function identity(value) {
+  return value;
+}
+
 function includes(iterable, value) {
   return iterable.indexOf(value) !== -1;
 }
@@ -169,6 +173,7 @@ module.exports = {
   flat: flat,
   gcd: gcd,
   getProperty: getProperty,
+  identity: identity,
   includes: includes,
   isEqual: isEqual,
   isInteger: isInteger,

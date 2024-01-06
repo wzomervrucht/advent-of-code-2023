@@ -11,8 +11,8 @@ function getInput(file) {
 }
 
 try {
-  var puzzle = require("./puzzles/08/haunted-wasteland.js");
-  var input = getInput("./puzzles/08/haunted-wasteland.txt");
+  var puzzle = require("./puzzles/09/mirage-maintenance.js");
+  var input = getInput("./puzzles/09/mirage-maintenance.txt");
   console.log("Part 1: " + puzzle.solve1(input));
   console.log("Part 2: " + puzzle.solve2(input));
 } catch (error) {
