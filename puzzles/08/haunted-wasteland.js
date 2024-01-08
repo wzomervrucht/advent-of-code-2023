@@ -68,8 +68,10 @@ function isEndNode(node) {
 }
 
 function findCycle(path, endNodes) {
+  // step numbers at which an end node is reached
   var ends = _.sort(_.flat(endNodes.map(_.evaluate(path.visits))));
   assert(ends.length);
+  // apparently, this occurs at every multiple of ends[0] steps
   assume(ends.length === 1 || (ends.length === 2 && ends[1] === 2 * ends[0]));
   assume(_.first(ends) >= path.cycle && _.last(ends) === path.steps - path.cycle);
   return ends[0];

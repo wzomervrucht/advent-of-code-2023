@@ -20,12 +20,12 @@ function solve2(input) {
 }
 
 function parseSeeds(lines) {
-  assert(lines.length === 1 && regex.test(lines[0]));
+  assert(lines.length === 1 && regex0.test(lines[0]));
   return lines[0].match(/\d+/g).map(_.parse);
 }
 
 function parseSeedRanges(lines) {
-  assert(lines.length === 1 && regex.test(lines[0]));
+  assert(lines.length === 1 && regex0.test(lines[0]));
   var numbers = lines[0].match(/\d+/g).map(_.parse);
   var ranges = [];
   for (var i = 0; i < numbers.length; i += 2) {
@@ -37,16 +37,17 @@ function parseSeedRanges(lines) {
 function parseMap(lines) {
   assert(lines.length >= 2);
   var map = lines.slice(1).map(function (line) {
-    var numbers = (line.match(/^(\d+) (\d+) (\d+)$/) || []).map(_.parse);
-    assert(numbers.length);
+    assert(regex1.test(line));
+    var numbers = line.match(/\d+/g).map(_.parse);
     return {
-      start: numbers[2],
-      end: numbers[2] + numbers[3],
-      offset: numbers[1] - numbers[2]
+      start: numbers[1],
+      end: numbers[1] + numbers[2],
+      offset: numbers[0] - numbers[1]
     };
   });
-
   _.sort(map, _.getProperty("start"));
+
+  // insert offset 0 map ranges in the gaps
   for (var i = 1; i < map.length; i++) {
     assert(map[i - 1].end <= map[i].start);
     if (map[i - 1].end < map[i].start) {
@@ -55,6 +56,7 @@ function parseMap(lines) {
   }
   map.unshift({ start: -Infinity, end: _.first(map).start, offset: 0 });
   map.push({ start: _.last(map).end, end: Infinity, offset: 0 });
+
   return map;
 }
 
@@ -84,7 +86,8 @@ function mapRanges(ranges, map) {
   return mappedRanges;
 }
 
-var regex = /^seeds:(?: \d+ \d+)+$/;
+var regex0 = /^seeds:(?: \d+ \d+)+$/;
+var regex1 = /^\d+ \d+ \d+$/;
 
 module.exports = {
   day: 5,
