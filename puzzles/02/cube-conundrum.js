@@ -40,7 +40,6 @@ module.exports = {
   title: "Cube Conundrum",
   solve1: solve1,
   solve2: solve2,
-  input: "cube-conundrum.txt",
   answer1: 2685,
   answer2: 83707,
   tests: [{ input: "test.txt", answer1: 8, answer2: 2286 }]

@@ -57,7 +57,6 @@ module.exports = {
   title: "Mirage Maintenance",
   solve1: solve1,
   solve2: solve2,
-  input: "mirage-maintenance.txt",
   answer1: 1987402313,
   answer2: 900,
   tests: [{ input: "test.txt", answer1: 114, answer2: 2 }]

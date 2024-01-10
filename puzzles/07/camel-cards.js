@@ -86,7 +86,6 @@ module.exports = {
   title: "Camel Cards",
   solve1: solve1,
   solve2: solve2,
-  input: "camel-cards.txt",
   answer1: 249483956,
   answer2: 252137472,
   tests: [{ input: "test.txt", answer1: 6440, answer2: 5905 }]

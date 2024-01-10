@@ -101,7 +101,6 @@ module.exports = {
   title: "Pipe Maze",
   solve1: solve1,
   solve2: solve2,
-  input: "pipe-maze.txt",
   answer1: 6757,
   answer2: 523,
   tests: [

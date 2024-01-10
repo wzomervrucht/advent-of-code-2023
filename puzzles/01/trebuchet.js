@@ -46,7 +46,6 @@ module.exports = {
   title: "Trebuchet?!",
   solve1: solve1,
   solve2: solve2,
-  input: "trebuchet.txt",
   answer1: 54927,
   answer2: 54581,
   tests: [

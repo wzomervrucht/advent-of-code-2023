@@ -49,7 +49,6 @@ module.exports = {
   title: "Scratchcards",
   solve1: solve1,
   solve2: solve2,
-  input: "scratchcards.txt",
   answer1: 21959,
   answer2: 5132675,
   tests: [{ input: "test.txt", answer1: 13, answer2: 30 }]

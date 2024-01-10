@@ -38,7 +38,6 @@ module.exports = {
   title: "Wait For It",
   solve1: solve1,
   solve2: solve2,
-  input: "wait-for-it.txt",
   answer1: 840336,
   answer2: 41382569,
   tests: [{ input: "test.txt", answer1: 288, answer2: 71503 }]

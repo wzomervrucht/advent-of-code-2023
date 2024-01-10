@@ -85,7 +85,6 @@ module.exports = {
   title: "Haunted Wasteland",
   solve1: solve1,
   solve2: solve2,
-  input: "haunted-wasteland.txt",
   answer1: 20569,
   answer2: 21366921060721,
   tests: [
