@@ -31,17 +31,23 @@ function evaluate(object) {
   };
 }
 
-function find(array, callback) {
-  return array[findIndex(array, callback)];
+function find(iterable, callback) {
+  return iterable[findIndex(iterable, callback)];
 }
 
-function findIndex(array, callback) {
-  for (var i = 0; i < array.length; i++) {
-    if (callback(array[i])) {
+function findIndex(iterable, callback) {
+  for (var i = 0; i < iterable.length; i++) {
+    if (callback(iterable[i])) {
       return i;
     }
   }
   return -1;
+}
+
+function findKey(object, callback) {
+  return find(keys(object), function (key) {
+    return callback(object[key]);
+  });
 }
 
 function first(iterable) {
@@ -169,6 +175,7 @@ module.exports = {
   evaluate: evaluate,
   find: find,
   findIndex: findIndex,
+  findKey: findKey,
   first: first,
   flat: flat,
   gcd: gcd,
