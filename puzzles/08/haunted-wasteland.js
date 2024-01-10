@@ -37,9 +37,9 @@ function parseNodes(lines) {
 }
 
 function navigate(nodes, instructions, startNode, endNode) {
-  var visits = _.keys(nodes).reduce(function (partial, node) {
-    partial[node] = [];
-    return partial;
+  var visits = _.keys(nodes).reduce(function (object, key) {
+    object[key] = [];
+    return object;
   }, {});
   var node = startNode;
   var steps = 0;

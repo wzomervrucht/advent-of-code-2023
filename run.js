@@ -10,11 +10,13 @@ function getInput(file) {
   return input.slice(0, -1).split("\n");
 }
 
-try {
-  var puzzle = require("./puzzles/09/mirage-maintenance.js");
-  var input = getInput("./puzzles/09/mirage-maintenance.txt");
-  console.log("Part 1: " + puzzle.solve1(input));
-  console.log("Part 2: " + puzzle.solve2(input));
-} catch (error) {
-  console.log(error.message);
-}
+(function () {
+  try {
+    var puzzle = require("./puzzles/09/mirage-maintenance.js");
+    var input = getInput("./puzzles/09/mirage-maintenance.txt");
+    console.log("Part 1: " + puzzle.solve1(input));
+    console.log("Part 2: " + puzzle.solve2(input));
+  } catch (error) {
+    console.log(error.message);
+  }
+})();
