@@ -12,8 +12,8 @@ function getInput(file) {
 
 (function () {
   try {
-    var puzzle = require("./puzzles/10/pipe-maze");
-    var input = getInput("./puzzles/10/input.txt");
+    var puzzle = require("./puzzles/11/cosmic-expansion");
+    var input = getInput("./puzzles/11/input.txt");
     console.log("Part 1: " + puzzle.solve1(input));
     console.log("Part 2: " + puzzle.solve2(input));
   } catch (error) {

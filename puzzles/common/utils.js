@@ -139,6 +139,14 @@ function product(values) {
   }, 1);
 }
 
+function range(size) {
+  var array = new Array(size);
+  for (var i = 0; i < size; i++) {
+    array[i] = i;
+  }
+  return array;
+}
+
 function sort(array, callback) {
   return array.sort(function (a, b) {
     return callback ? callback(a) - callback(b) : a - b;
@@ -193,6 +201,7 @@ module.exports = {
   min: min,
   parse: parse,
   product: product,
+  range: range,
   sort: sort,
   split: split,
   sum: sum,
