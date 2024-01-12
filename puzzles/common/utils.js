@@ -1,5 +1,6 @@
 "use strict";
 
+// not exported
 function args(values) {
   if (values.length === 1 && Array.isArray(values[0])) {
     return values[0];
@@ -58,6 +59,7 @@ function flat(array) {
   return Array.prototype.concat.apply([], array);
 }
 
+// expects a non-empty list of positive integers
 function gcd() {
   var values = sort(args(arguments));
   while (values.length > 1) {
@@ -91,9 +93,9 @@ function isInteger(value) {
   return Math.round(value) === value;
 }
 
-function isRectangular(array) {
-  return array.every(function (row) {
-    return row.length === array[0].length;
+function isRectangular(grid) {
+  return grid.every(function (row) {
+    return row.length === grid[0].length;
   });
 }
 
@@ -105,12 +107,14 @@ function last(iterable) {
   return iterable[iterable.length - 1];
 }
 
+// expects a non-empty list of positive integers
 function lcm() {
   return args(arguments).reduce(function (x, y) {
-    return (x * y) / gcd(x, y);
+    return x * (y / gcd(x, y));
   });
 }
 
+// expects a global regex
 function matchAll(string, regex) {
   var matches = [];
   var match = regex.exec(string);
