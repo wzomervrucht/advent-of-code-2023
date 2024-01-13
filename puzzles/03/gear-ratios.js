@@ -19,11 +19,11 @@ function solve2(input) {
   return _.sum(gearRatios);
 }
 
-function findNumbers(line, x) {
+function findNumbers(line, index) {
   var matches = _.matchAll(line, /\d+/g);
   return matches.map(function (match) {
     return {
-      x: x,
+      x: index,
       y: match.index,
       length: match[0].length,
       value: _.parse(match[0])
@@ -31,17 +31,17 @@ function findNumbers(line, x) {
   });
 }
 
-function findSymbols(line, x) {
+function findSymbols(line, index) {
   var matches = _.matchAll(line, /[^\d.]/g);
   return matches.map(function (match) {
-    return { x: x, y: match.index };
+    return { x: index, y: match.index };
   });
 }
 
-function findAsterisks(line, x) {
+function findAsterisks(line, index) {
   var matches = _.matchAll(line, /\*/g);
   return matches.map(function (match) {
-    return { x: x, y: match.index };
+    return { x: index, y: match.index };
   });
 }
 

@@ -5,7 +5,8 @@ var _ = require("../common/utils");
 
 function solve1(input) {
   var cards = input.map(parseCard);
-  var points = cards.map(countMatches).map(getPoints);
+  var matches = cards.map(countMatches);
+  var points = matches.map(getPoints);
   return _.sum(points);
 }
 
