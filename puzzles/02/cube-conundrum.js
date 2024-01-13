@@ -19,9 +19,9 @@ function parseGame(line) {
   assert(regex.test(line));
   return {
     id: _.parse(line.match(/\d+/)[0]),
-    red: _.max((line.match(/\d+ red/g) || []).map(_.parse).concat(0)),
-    green: _.max((line.match(/\d+ green/g) || []).map(_.parse).concat(0)),
-    blue: _.max((line.match(/\d+ blue/g) || []).map(_.parse).concat(0))
+    red: _.max((line.match(/\d+(?= red)/g) || ["0"]).map(_.parse)),
+    green: _.max((line.match(/\d+(?= green)/g) || ["0"]).map(_.parse)),
+    blue: _.max((line.match(/\d+(?= blue)/g) || ["0"]).map(_.parse))
   };
 }
 
@@ -33,7 +33,7 @@ function getPower(game) {
   return game.red * game.green * game.blue;
 }
 
-var regex = /^Game \d+: \d+ (?:red|green|blue)(?:[,;] \d+ (?:red|green|blue))*$/;
+var regex = /^Game \d+:(?: \d+ (red|green|blue)(?![^;]*\1)(?:[,;](?=.)|$))+$/;
 
 module.exports = {
   day: 2,

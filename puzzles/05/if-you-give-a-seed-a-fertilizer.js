@@ -35,9 +35,9 @@ function parseSeedRanges(lines) {
 }
 
 function parseMap(lines) {
-  assert(lines.length >= 2);
+  assert(lines.length >= 2 && regex1.test(lines[0]));
   var map = lines.slice(1).map(function (line) {
-    assert(regex1.test(line));
+    assert(regex2.test(line));
     var numbers = line.match(/\d+/g).map(_.parse);
     return {
       start: numbers[1],
@@ -87,7 +87,8 @@ function mapRanges(ranges, map) {
 }
 
 var regex0 = /^seeds:(?: \d+ \d+)+$/;
-var regex1 = /^\d+ \d+ \d+$/;
+var regex1 = /^\w+-to-\w+ map:$/;
+var regex2 = /^\d+ \d+ \d+$/;
 
 module.exports = {
   day: 5,
