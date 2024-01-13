@@ -45,8 +45,8 @@ function findPrevious(history) {
 }
 
 function getDifferences(sequence) {
-  return sequence.slice(1).map(function (value, i) {
-    return value - sequence[i];
+  return _.range(sequence.length - 1).map(function (i) {
+    return sequence[i + 1] - sequence[i];
   });
 }
 
