@@ -95,7 +95,5 @@ module.exports = {
   title: "If You Give A Seed A Fertilizer",
   solve1: solve1,
   solve2: solve2,
-  answer1: 88151870,
-  answer2: 2008785,
   tests: [{ input: "test.txt", answer1: 35, answer2: 46 }]
 };

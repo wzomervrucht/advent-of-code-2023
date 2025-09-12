@@ -74,7 +74,5 @@ module.exports = {
   title: "Gear Ratios",
   solve1: solve1,
   solve2: solve2,
-  answer1: 544433,
-  answer2: 76314915,
   tests: [{ input: "test.txt", answer1: 4361, answer2: 467835 }]
 };

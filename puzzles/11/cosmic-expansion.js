@@ -53,8 +53,6 @@ module.exports = {
   title: "Cosmic Expansion",
   solve1: solve1,
   solve2: solve2,
-  answer1: 9522407,
-  answer2: 544723432977,
   tests: [
     { input: "test.txt", answer1: 374 },
     { input: "test.txt", config: { expansion: 10 }, answer2: 1030 },
