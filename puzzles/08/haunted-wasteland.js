@@ -8,7 +8,7 @@ function solve1(input) {
   assert(regex0.test(input[0]) && input[1] === "");
   var instructions = input[0];
   var nodes = parseNodes(input.slice(2));
-  assert(nodes["AAA"]);
+  assert("AAA" in nodes);
   var path = navigate(nodes, instructions, "AAA", "ZZZ");
   assert(path.node === "ZZZ");
   return path.steps;

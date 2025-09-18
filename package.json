@@ -4,11 +4,8 @@
   "author": "Wouter Zomervrucht",
   "license": "ISC",
   "type": "commonjs",
-  "scripts": {
-    "lint": "eslint --fix . && prettier --log-level warn --write ."
-  },
   "devDependencies": {
-    "eslint": "^8.55.0",
-    "prettier": "^3.1.0"
+    "eslint": "^8.57.1",
+    "prettier": "^3.5.3"
   }
 }

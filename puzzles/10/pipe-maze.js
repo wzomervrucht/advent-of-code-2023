@@ -38,10 +38,10 @@ function findStart(maze) {
 
   // find connecting pipes in neighboring tiles
   var neighbors = {
-    N: maze[x - 1] && _.includes(_.keys(directions["N"]), maze[x - 1][y]),
-    E: _.includes(_.keys(directions["E"]), maze[x][y + 1]),
-    S: maze[x + 1] && _.includes(_.keys(directions["S"]), maze[x + 1][y]),
-    W: _.includes(_.keys(directions["W"]), maze[x][y - 1])
+    N: maze[x - 1] && _.includes(_.keys(directions.N), maze[x - 1][y]),
+    E: _.includes(_.keys(directions.E), maze[x][y + 1]),
+    S: maze[x + 1] && _.includes(_.keys(directions.S), maze[x + 1][y]),
+    W: _.includes(_.keys(directions.W), maze[x][y - 1])
   };
   var connections = ["N", "E", "S", "W"].filter(_.evaluate(neighbors));
   assert(connections.length === 2);
