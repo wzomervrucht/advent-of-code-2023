@@ -86,8 +86,9 @@ module.exports = {
   solve1: solve1,
   solve2: solve2,
   tests: [
-    { input: "test1.txt", answer1: 2 },
-    { input: "test2.txt", answer1: 6 },
-    { input: "test3.txt", answer2: 6 }
-  ]
+    { test: 1, input: "test1.txt", answer1: 2 },
+    { test: 2, input: "test2.txt", answer1: 6 },
+    { test: 3, input: "test3.txt", answer2: 6 }
+  ],
+  dirname: __dirname
 };

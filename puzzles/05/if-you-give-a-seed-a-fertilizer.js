@@ -95,5 +95,6 @@ module.exports = {
   title: "If You Give A Seed A Fertilizer",
   solve1: solve1,
   solve2: solve2,
-  tests: [{ input: "test.txt", answer1: 35, answer2: 46 }]
+  tests: [{ test: 1, input: "test.txt", answer1: 35, answer2: 46 }],
+  dirname: __dirname
 };

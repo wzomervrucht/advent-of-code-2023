@@ -75,6 +75,12 @@ function getProperty(key) {
   };
 }
 
+function hasProperty(key, value) {
+  return function (object) {
+    return object[key] === value;
+  };
+}
+
 function identity(value) {
   return value;
 }
@@ -180,6 +186,12 @@ function toArray(string) {
   return string.split("");
 }
 
+function unary(func) {
+  return function (value) {
+    return func(value);
+  };
+}
+
 module.exports = {
   constant: constant,
   difference: difference,
@@ -192,6 +204,7 @@ module.exports = {
   flat: flat,
   gcd: gcd,
   getProperty: getProperty,
+  hasProperty: hasProperty,
   identity: identity,
   includes: includes,
   isEqual: isEqual,
@@ -209,5 +222,6 @@ module.exports = {
   sort: sort,
   split: split,
   sum: sum,
-  toArray: toArray
+  toArray: toArray,
+  unary: unary
 };

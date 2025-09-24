@@ -1,1 +1,5 @@
 node_modules/
+node.exe
+puzzles/**/*.md
+puzzles/**/input.txt
+puzzles/**/output.txt

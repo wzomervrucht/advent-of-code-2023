@@ -40,5 +40,6 @@ module.exports = {
   title: "Cube Conundrum",
   solve1: solve1,
   solve2: solve2,
-  tests: [{ input: "test.txt", answer1: 8, answer2: 2286 }]
+  tests: [{ test: 1, input: "test.txt", answer1: 8, answer2: 2286 }],
+  dirname: __dirname
 };

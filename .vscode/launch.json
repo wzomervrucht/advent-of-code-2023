@@ -2,10 +2,20 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Solve",
       "type": "node",
       "request": "launch",
-      "name": "Launch",
-      "program": "${workspaceFolder}/run.js"
+      "program": "solve.js",
+      "args": ["--day=", "--part=", "--input="],
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "Test",
+      "type": "node",
+      "request": "launch",
+      "program": "test.js",
+      "args": ["--day=", "--part="],
+      "internalConsoleOptions": "openOnSessionStart"
     }
   ]
 }

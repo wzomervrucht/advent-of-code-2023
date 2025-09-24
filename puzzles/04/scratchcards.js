@@ -50,5 +50,6 @@ module.exports = {
   title: "Scratchcards",
   solve1: solve1,
   solve2: solve2,
-  tests: [{ input: "test.txt", answer1: 13, answer2: 30 }]
+  tests: [{ test: 1, input: "test.txt", answer1: 13, answer2: 30 }],
+  dirname: __dirname
 };

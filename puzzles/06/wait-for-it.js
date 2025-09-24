@@ -38,5 +38,6 @@ module.exports = {
   title: "Wait For It",
   solve1: solve1,
   solve2: solve2,
-  tests: [{ input: "test.txt", answer1: 288, answer2: 71503 }]
+  tests: [{ test: 1, input: "test.txt", answer1: 288, answer2: 71503 }],
+  dirname: __dirname
 };

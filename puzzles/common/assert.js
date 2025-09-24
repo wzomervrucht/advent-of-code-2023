@@ -5,7 +5,7 @@ function assert(assertion, message) {
 }
 
 assert.fail = function (message) {
-  throw new Error("Invalid input" + (message ? ": " + message : "."));
+  throw new Error("Invalid input" + (message ? ": " + message : ""));
 };
 
 module.exports = assert;

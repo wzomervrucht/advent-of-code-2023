@@ -57,5 +57,6 @@ module.exports = {
   title: "Mirage Maintenance",
   solve1: solve1,
   solve2: solve2,
-  tests: [{ input: "test.txt", answer1: 114, answer2: 2 }]
+  tests: [{ test: 1, input: "test.txt", answer1: 114, answer2: 2 }],
+  dirname: __dirname
 };

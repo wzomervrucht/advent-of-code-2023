@@ -86,5 +86,6 @@ module.exports = {
   title: "Camel Cards",
   solve1: solve1,
   solve2: solve2,
-  tests: [{ input: "test.txt", answer1: 6440, answer2: 5905 }]
+  tests: [{ test: 1, input: "test.txt", answer1: 6440, answer2: 5905 }],
+  dirname: __dirname
 };

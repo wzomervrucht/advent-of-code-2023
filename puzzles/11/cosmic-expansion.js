@@ -54,8 +54,9 @@ module.exports = {
   solve1: solve1,
   solve2: solve2,
   tests: [
-    { input: "test.txt", answer1: 374 },
-    { input: "test.txt", config: { expansion: 10 }, answer2: 1030 },
-    { input: "test.txt", config: { expansion: 100 }, answer2: 8410 }
-  ]
+    { test: 1, input: "test.txt", answer1: 374 },
+    { test: 2, input: "test.txt", config: { expansion: 10 }, answer2: 1030 },
+    { test: 3, input: "test.txt", config: { expansion: 100 }, answer2: 8410 }
+  ],
+  dirname: __dirname
 };

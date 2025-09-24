@@ -102,11 +102,12 @@ module.exports = {
   solve1: solve1,
   solve2: solve2,
   tests: [
-    { input: "test1.txt", answer1: 4 },
-    { input: "test2.txt", answer1: 8 },
-    { input: "test3.txt", answer2: 4 },
-    { input: "test4.txt", answer2: 4 },
-    { input: "test5.txt", answer2: 8 },
-    { input: "test6.txt", answer2: 10 }
-  ]
+    { test: 1, input: "test1.txt", answer1: 4 },
+    { test: 2, input: "test2.txt", answer1: 8 },
+    { test: 3, input: "test3.txt", answer2: 4 },
+    { test: 4, input: "test4.txt", answer2: 4 },
+    { test: 5, input: "test5.txt", answer2: 8 },
+    { test: 6, input: "test6.txt", answer2: 10 }
+  ],
+  dirname: __dirname
 };
