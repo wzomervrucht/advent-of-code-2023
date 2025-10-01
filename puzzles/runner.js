@@ -41,13 +41,13 @@ exports.test = function () {
 function testPuzzle(puzzle, part) {
   console.log("=== Day %d: %s ===", puzzle.day, puzzle.title);
   puzzle.tests.forEach(function (test) {
-    var input = getInput(path.join(puzzle.dirname, test.input));
-    part !== 2 && test.answer1 && testPart(puzzle, test, input, 1);
-    part !== 1 && test.answer2 && testPart(puzzle, test, input, 2);
+    part !== 2 && test.answer1 !== undefined && testPart(puzzle, test, 1);
+    part !== 1 && test.answer2 !== undefined && testPart(puzzle, test, 2);
   });
 }
 
-function testPart(puzzle, test, input, part) {
+function testPart(puzzle, test, part) {
+  var input = getInput(path.join(puzzle.dirname, test.input));
   var solve = part === 1 ? puzzle.solve1 : puzzle.solve2;
   var expected = part === 1 ? test.answer1 : test.answer2;
   var actual = solve(input, test.config);
