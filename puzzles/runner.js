@@ -84,7 +84,7 @@ function runAll(func) {
 }
 
 function runDay(func, day, part, filename) {
-  var puzzle = _.find(puzzles, _.hasProperty("day", day));
+  var puzzle = _.find(puzzles, _.has("day", day));
   puzzle || throwError("Day '%d' not found", day);
   func(puzzle, part, filename);
 }

@@ -5,8 +5,8 @@ var _ = require("../common/utils");
 
 function solve1(input) {
   assert(input.length === 2 && regex0.test(input[0]) && regex1.test(input[1]));
-  var times = input[0].match(/\d+/g).map(_.parse);
-  var distances = input[1].match(/\d+/g).map(_.parse);
+  var times = input[0].match(/\d+/g).map(_.parseInt);
+  var distances = input[1].match(/\d+/g).map(_.parseInt);
   assert(times.length === distances.length);
   var options = times.map(function (time, i) {
     return countOptions(time, distances[i]);
@@ -16,8 +16,8 @@ function solve1(input) {
 
 function solve2(input) {
   assert(input.length === 2 && regex0.test(input[0]) && regex1.test(input[1]));
-  var time = _.parse(input[0].match(/\d+/g).join(""));
-  var distance = _.parse(input[1].match(/\d+/g).join(""));
+  var time = parseInt(input[0].match(/\d+/g).join(""));
+  var distance = parseInt(input[1].match(/\d+/g).join(""));
   return countOptions(time, distance);
 }
 

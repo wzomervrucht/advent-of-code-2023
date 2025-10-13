@@ -7,7 +7,7 @@ function solve1(input) {
   assert(_.isRectangular(input));
   var numbers = _.flat(input.map(findNumbers));
   var symbols = _.flat(input.map(findSymbols));
-  var partNumbers = numbers.filter(hasAdjacentSymbol(symbols)).map(_.getProperty("value"));
+  var partNumbers = numbers.filter(hasAdjacentSymbol(symbols)).map(_.get("value"));
   return _.sum(partNumbers);
 }
 
@@ -26,7 +26,7 @@ function findNumbers(line, index) {
       x: index,
       y: match.index,
       length: match[0].length,
-      value: _.parse(match[0])
+      value: parseInt(match[0])
     };
   });
 }

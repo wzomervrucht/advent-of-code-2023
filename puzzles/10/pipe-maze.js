@@ -19,7 +19,7 @@ function solve2(input) {
 
 function findLoop(maze) {
   var loop = maze.map(function (row) {
-    return _.toArray(row).map(_.constant(""));
+    return row.split("").map(_.constant());
   });
   var position = findStart(maze);
   while (!loop[position.x][position.y]) {
@@ -49,7 +49,7 @@ function findStart(maze) {
   // deduce starting direction and pipe type
   var directionIn = { N: "S", E: "W", S: "N", W: "E" }[connections[0]];
   var directionOut = connections[1];
-  var pipe = _.findKey(directions[directionIn], _.isEqual(directionOut));
+  var pipe = _.findKey(directions[directionIn], _.equals(directionOut));
 
   return { x: x, y: y, direction: directionIn, pipe: pipe };
 }

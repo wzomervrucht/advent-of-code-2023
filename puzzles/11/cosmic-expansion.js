@@ -16,8 +16,8 @@ function solve2(input, config) {
 function solve(input, expansion) {
   assert(_.isRectangular(input) && regex.test(input.join("")));
   var galaxies = findGalaxies(input);
-  var emptyRows = _.difference(_.range(input.length), galaxies.map(_.getProperty("x")));
-  var emptyCols = _.difference(_.range(input[0].length), galaxies.map(_.getProperty("y")));
+  var emptyRows = _.difference(_.range(input.length), galaxies.map(_.get("x")));
+  var emptyCols = _.difference(_.range(input[0].length), galaxies.map(_.get("y")));
   var total = 0;
   for (var i = 0; i < galaxies.length; i++) {
     for (var j = i + 1; j < galaxies.length; j++) {

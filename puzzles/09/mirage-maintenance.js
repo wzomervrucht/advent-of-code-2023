@@ -17,7 +17,7 @@ function solve2(input) {
 
 function parseHistory(line) {
   assert(regex.test(line));
-  return line.match(/-?\d+/g).map(_.parse);
+  return line.match(/-?\d+/g).map(_.parseInt);
 }
 
 function findNext(history) {

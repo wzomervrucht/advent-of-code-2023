@@ -20,10 +20,10 @@ function difference(array, values) {
   });
 }
 
-function distinct(array) {
-  return array.filter(function (value, index) {
-    return array.indexOf(value) === index;
-  });
+function equals(value) {
+  return function (other) {
+    return other === value;
+  };
 }
 
 function evaluate(object) {
@@ -69,13 +69,13 @@ function gcd() {
   return values[0];
 }
 
-function getProperty(key) {
+function get(key) {
   return function (object) {
     return object[key];
   };
 }
 
-function hasProperty(key, value) {
+function has(key, value) {
   return function (object) {
     return object[key] === value;
   };
@@ -87,12 +87,6 @@ function identity(value) {
 
 function includes(iterable, value) {
   return iterable.indexOf(value) !== -1;
-}
-
-function isEqual(value) {
-  return function (other) {
-    return value === other;
-  };
 }
 
 function isInteger(value) {
@@ -139,19 +133,15 @@ function min() {
   return Math.min.apply(Math, args(arguments));
 }
 
-function parse(value) {
-  return parseInt(value);
-}
-
 function product(values) {
   return values.reduce(function (x, y) {
     return x * y;
   }, 1);
 }
 
-function range(size) {
-  var array = new Array(size);
-  for (var i = 0; i < size; i++) {
+function range(length) {
+  var array = new Array(length);
+  for (var i = 0; i < length; i++) {
     array[i] = i;
   }
   return array;
@@ -165,14 +155,14 @@ function sort(array, callback) {
 
 function split(array, value) {
   var chunks = [];
-  var from = 0;
-  var index = array.indexOf(value);
-  while (index !== -1) {
-    chunks.push(array.slice(from, index));
-    from = index + 1;
-    index = array.indexOf(value, from);
+  var start = 0;
+  var end = array.indexOf(value);
+  while (end !== -1) {
+    chunks.push(array.slice(start, end));
+    start = end + 1;
+    end = array.indexOf(value, start);
   }
-  chunks.push(array.slice(from));
+  chunks.push(array.slice(start));
   return chunks;
 }
 
@@ -182,20 +172,22 @@ function sum(values) {
   }, 0);
 }
 
-function toArray(string) {
-  return string.split("");
+function unary(callback) {
+  return function (value) {
+    return callback(value);
+  };
 }
 
-function unary(func) {
-  return function (value) {
-    return func(value);
-  };
+function unique(array) {
+  return array.filter(function (value, index) {
+    return array.indexOf(value) === index;
+  });
 }
 
 module.exports = {
   constant: constant,
   difference: difference,
-  distinct: distinct,
+  equals: equals,
   evaluate: evaluate,
   find: find,
   findIndex: findIndex,
@@ -203,11 +195,10 @@ module.exports = {
   first: first,
   flat: flat,
   gcd: gcd,
-  getProperty: getProperty,
-  hasProperty: hasProperty,
+  get: get,
+  has: has,
   identity: identity,
   includes: includes,
-  isEqual: isEqual,
   isInteger: isInteger,
   isRectangular: isRectangular,
   keys: keys,
@@ -216,12 +207,12 @@ module.exports = {
   matchAll: matchAll,
   max: max,
   min: min,
-  parse: parse,
+  parseInt: unary(parseInt),
   product: product,
   range: range,
   sort: sort,
   split: split,
   sum: sum,
-  toArray: toArray,
-  unary: unary
+  unary: unary,
+  unique: unique
 };

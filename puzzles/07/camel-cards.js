@@ -20,8 +20,8 @@ function solve2(input) {
 function parseHand(line) {
   assert(regex.test(line));
   return {
-    cards: _.toArray(line.slice(0, 5)),
-    bid: _.parse(line.slice(6))
+    cards: line.slice(0, 5).split(""),
+    bid: parseInt(line.slice(6))
   };
 }
 
@@ -36,10 +36,10 @@ function sortHands(hands, joker) {
 }
 
 function getType(cards, joker) {
-  var jokers = joker ? cards.filter(_.isEqual("J")).length : 0;
+  var jokers = joker ? cards.filter(_.equals("J")).length : 0;
   var others = joker ? _.difference(cards, ["J"]) : cards;
-  var counts = _.distinct(others).map(function (card) {
-    return others.filter(_.isEqual(card)).length;
+  var counts = _.unique(others).map(function (card) {
+    return others.filter(_.equals(card)).length;
   });
   switch (_.max(counts.concat(0)) + jokers) {
     case 5:

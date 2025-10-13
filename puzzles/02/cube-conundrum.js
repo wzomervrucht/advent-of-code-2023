@@ -5,7 +5,7 @@ var _ = require("../common/utils");
 
 function solve1(input) {
   var games = input.map(parseGame);
-  var ids = games.filter(isPossible).map(_.getProperty("id"));
+  var ids = games.filter(isPossible).map(_.get("id"));
   return _.sum(ids);
 }
 
@@ -18,10 +18,10 @@ function solve2(input) {
 function parseGame(line) {
   assert(regex.test(line));
   return {
-    id: _.parse(line.match(/\d+/)[0]),
-    red: _.max((line.match(/\d+(?= red)/g) || ["0"]).map(_.parse)),
-    green: _.max((line.match(/\d+(?= green)/g) || ["0"]).map(_.parse)),
-    blue: _.max((line.match(/\d+(?= blue)/g) || ["0"]).map(_.parse))
+    id: parseInt(line.match(/\d+/)[0]),
+    red: _.max((line.match(/\d+(?= red)/g) || ["0"]).map(_.parseInt)),
+    green: _.max((line.match(/\d+(?= green)/g) || ["0"]).map(_.parseInt)),
+    blue: _.max((line.match(/\d+(?= blue)/g) || ["0"]).map(_.parseInt))
   };
 }
 

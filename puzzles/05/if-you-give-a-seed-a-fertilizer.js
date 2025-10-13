@@ -16,17 +16,17 @@ function solve2(input) {
   var seeds = parseSeedRanges(chunks[0]);
   var maps = chunks.slice(1).map(parseMap);
   var locations = maps.reduce(mapRanges, seeds);
-  return _.min(locations.map(_.getProperty("start")));
+  return _.min(locations.map(_.get("start")));
 }
 
 function parseSeeds(lines) {
   assert(lines.length === 1 && regex0.test(lines[0]));
-  return lines[0].match(/\d+/g).map(_.parse);
+  return lines[0].match(/\d+/g).map(_.parseInt);
 }
 
 function parseSeedRanges(lines) {
   assert(lines.length === 1 && regex0.test(lines[0]));
-  var numbers = lines[0].match(/\d+/g).map(_.parse);
+  var numbers = lines[0].match(/\d+/g).map(_.parseInt);
   var ranges = [];
   for (var i = 0; i < numbers.length; i += 2) {
     ranges.push({ start: numbers[i], end: numbers[i] + numbers[i + 1] });
@@ -38,14 +38,14 @@ function parseMap(lines) {
   assert(lines.length >= 2 && regex1.test(lines[0]));
   var map = lines.slice(1).map(function (line) {
     assert(regex2.test(line));
-    var numbers = line.match(/\d+/g).map(_.parse);
+    var numbers = line.match(/\d+/g).map(_.parseInt);
     return {
       start: numbers[1],
       end: numbers[1] + numbers[2],
       offset: numbers[0] - numbers[1]
     };
   });
-  _.sort(map, _.getProperty("start"));
+  _.sort(map, _.get("start"));
 
   // insert offset 0 map ranges in the gaps
   for (var i = 1; i < map.length; i++) {

@@ -5,7 +5,7 @@ var _ = require("../common/utils");
 
 function solve1(input) {
   var values = input.map(function (line) {
-    var digits = (line.match(/\d/g) || []).map(_.parse);
+    var digits = (line.match(/\d/g) || []).map(_.parseInt);
     assert(digits.length);
     return 10 * _.first(digits) + _.last(digits);
   });
@@ -35,7 +35,7 @@ function findDigits(line) {
 }
 
 function parseDigit(digit) {
-  return written.indexOf(digit) + 1 || _.parse(digit);
+  return written.indexOf(digit) + 1 || parseInt(digit);
 }
 
 var written = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];

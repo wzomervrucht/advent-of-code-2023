@@ -28,8 +28,8 @@ function parseCard(line) {
   var i = line.indexOf(":");
   var j = line.indexOf("|");
   return {
-    winning: line.slice(i, j).match(/\d+/g).map(_.parse),
-    numbers: line.slice(j).match(/\d+/g).map(_.parse)
+    winning: line.slice(i, j).match(/\d+/g).map(_.parseInt),
+    numbers: line.slice(j).match(/\d+/g).map(_.parseInt)
   };
 }
 
