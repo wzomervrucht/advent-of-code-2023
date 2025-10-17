@@ -62,7 +62,12 @@ function getAdjacentNumbers(numbers) {
 }
 
 function isAdjacent(number, symbol) {
-  return Math.abs(symbol.x - number.x) <= 1 && symbol.y >= number.y - 1 && symbol.y <= number.y + number.length;
+  return (
+    symbol.x >= number.x - 1 &&
+    symbol.x <= number.x + 1 &&
+    symbol.y >= number.y - 1 &&
+    symbol.y <= number.y + number.length
+  );
 }
 
 function getGearRatio(numbers) {

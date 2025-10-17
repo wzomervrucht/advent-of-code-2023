@@ -24,12 +24,12 @@ function solve2(input) {
 function findDigits(line) {
   // a global regex would miss overlapping matches
   var digits = [];
-  var from = 0;
+  var start = 0;
   var match = line.match(regex);
   while (match) {
     digits.push(parseDigit(match[0]));
-    from += match.index + 1;
-    match = line.slice(from).match(regex);
+    start += match.index + 1;
+    match = line.slice(start).match(regex);
   }
   return digits;
 }

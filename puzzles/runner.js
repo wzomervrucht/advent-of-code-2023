@@ -59,14 +59,13 @@ function testPart(puzzle, test, part) {
 }
 
 function parseArgs(options) {
-  var args = {};
   var regex = new RegExp("^--(" + options.join("|") + ")=(.*)$");
-  process.argv.slice(2).forEach(function (arg) {
+  return process.argv.slice(2).reduce(function (args, arg) {
     var match = arg.match(regex);
     match || throwError("Unexpected argument '%s'", arg);
     args[match[1]] = match[2];
-  });
   return args;
+  }, {});
 }
 
 function parseDay(day) {
@@ -79,14 +78,14 @@ function parsePart(part) {
   return part && parseInt(part);
 }
 
-function runAll(func) {
-  puzzles.forEach(_.unary(func));
+function runAll(run) {
+  puzzles.forEach(_.unary(run));
 }
 
-function runDay(func, day, part, filename) {
+function runDay(run, day, part, filename) {
   var puzzle = _.find(puzzles, _.has("day", day));
   puzzle || throwError("Day '%d' not found", day);
-  func(puzzle, part, filename);
+  run(puzzle, part, filename);
 }
 
 function getInput(filename) {

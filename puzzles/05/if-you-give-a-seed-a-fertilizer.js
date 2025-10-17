@@ -29,7 +29,10 @@ function parseSeedRanges(lines) {
   var numbers = lines[0].match(/\d+/g).map(_.parseInt);
   var ranges = [];
   for (var i = 0; i < numbers.length; i += 2) {
-    ranges.push({ start: numbers[i], end: numbers[i] + numbers[i + 1] });
+    ranges.push({
+      start: numbers[i],
+      end: numbers[i] + numbers[i + 1]
+    });
   }
   return ranges;
 }
@@ -51,7 +54,11 @@ function parseMap(lines) {
   for (var i = 1; i < map.length; i++) {
     assert(map[i - 1].end <= map[i].start);
     if (map[i - 1].end < map[i].start) {
-      map.splice(i, 0, { start: map[i - 1].end, end: map[i].start, offset: 0 });
+      map.splice(i, 0, {
+        start: map[i - 1].end,
+        end: map[i].start,
+        offset: 0
+      });
     }
   }
   map.unshift({ start: -Infinity, end: _.first(map).start, offset: 0 });

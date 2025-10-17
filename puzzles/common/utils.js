@@ -26,6 +26,12 @@ function equals(value) {
   };
 }
 
+function equalsMod(value, modulus) {
+  return function (other) {
+    return (other - value) % modulus === 0;
+  };
+}
+
 function evaluate(object) {
   return function (key) {
     return object[key];
@@ -114,6 +120,13 @@ function lcm() {
   });
 }
 
+function map(object, callback) {
+  return keys(object).reduce(function (mapped, key) {
+    mapped[key] = callback(object[key]);
+    return mapped;
+  }, {});
+}
+
 // expects a global regex
 function matchAll(string, regex) {
   var matches = [];
@@ -188,6 +201,7 @@ module.exports = {
   constant: constant,
   difference: difference,
   equals: equals,
+  equalsMod: equalsMod,
   evaluate: evaluate,
   find: find,
   findIndex: findIndex,
@@ -204,6 +218,7 @@ module.exports = {
   keys: keys,
   last: last,
   lcm: lcm,
+  map: map,
   matchAll: matchAll,
   max: max,
   min: min,

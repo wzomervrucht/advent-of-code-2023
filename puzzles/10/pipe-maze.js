@@ -6,8 +6,8 @@ var _ = require("../common/utils");
 function solve1(input) {
   assert(_.isRectangular(input) && regex.test(input.join("")));
   var loop = findLoop(input);
-  var pipe = loop.map(countPipe);
-  return _.sum(pipe) / 2;
+  var pipes = loop.map(countPipes);
+  return _.sum(pipes) / 2;
 }
 
 function solve2(input) {
@@ -17,31 +17,31 @@ function solve2(input) {
   return _.sum(inner);
 }
 
-function findLoop(maze) {
-  var loop = maze.map(function (row) {
+function findLoop(grid) {
+  var loop = grid.map(function (row) {
     return row.split("").map(_.constant());
   });
-  var position = findStart(maze);
+  var position = findStart(grid);
   while (!loop[position.x][position.y]) {
     loop[position.x][position.y] = position.pipe;
-    position = findNext(maze, position);
+    position = findNext(grid, position);
   }
   assert(position.pipe === "S");
   return loop;
 }
 
-function findStart(maze) {
-  var x = _.findIndex(maze, function (row) {
+function findStart(grid) {
+  var x = _.findIndex(grid, function (row) {
     return _.includes(row, "S");
   });
-  var y = maze[x].indexOf("S");
+  var y = grid[x].indexOf("S");
 
   // find connecting pipes in neighboring tiles
   var neighbors = {
-    N: maze[x - 1] && _.includes(_.keys(directions.N), maze[x - 1][y]),
-    E: _.includes(_.keys(directions.E), maze[x][y + 1]),
-    S: maze[x + 1] && _.includes(_.keys(directions.S), maze[x + 1][y]),
-    W: _.includes(_.keys(directions.W), maze[x][y - 1])
+    N: grid[x - 1] && directions.N[grid[x - 1][y]],
+    E: grid[x][y + 1] && directions.E[grid[x][y + 1]],
+    S: grid[x + 1] && directions.S[grid[x + 1][y]],
+    W: grid[x][y - 1] && directions.W[grid[x][y - 1]]
   };
   var connections = ["N", "E", "S", "W"].filter(_.evaluate(neighbors));
   assert(connections.length === 2);
@@ -54,7 +54,7 @@ function findStart(maze) {
   return { x: x, y: y, direction: directionIn, pipe: pipe };
 }
 
-function findNext(maze, position) {
+function findNext(grid, position) {
   var x = position.x;
   var y = position.y;
   var direction = directions[position.direction][position.pipe];
@@ -63,28 +63,26 @@ function findNext(maze, position) {
   direction === "E" && y++;
   direction === "S" && x++;
   direction === "W" && y--;
-  assert(maze[x] && maze[x][y]);
-  return { x: x, y: y, direction: direction, pipe: maze[x][y] };
+  assert(grid[x] && grid[x][y]);
+  return { x: x, y: y, direction: direction, pipe: grid[x][y] };
 }
 
-function countPipe(row) {
+function countPipes(row) {
   return row.filter(_.identity).length;
 }
 
 function countInner(row) {
-  var count = 0;
-  var inside = false;
   var pipe;
-  row.forEach(function (tile) {
+  var inside = false;
+  return row.reduce(function (count, tile) {
     if (tile === "L" || tile === "F") {
       pipe = tile;
-    } else if (tile === "|" || (tile === "7" && pipe === "L") || (tile === "J" && pipe === "F")) {
-      inside = !inside;
-    } else if (!tile && inside) {
-      count++;
     }
-  });
-  return count;
+    if (tile === "|" || (tile === "7" && pipe === "L") || (tile === "J" && pipe === "F")) {
+      inside = !inside;
+    }
+    return !tile && inside ? count + 1 : count;
+  }, 0);
 }
 
 var directions = {

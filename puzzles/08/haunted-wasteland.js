@@ -9,7 +9,7 @@ function solve1(input) {
   var instructions = input[0];
   var nodes = parseNodes(input.slice(2));
   assert("AAA" in nodes);
-  var path = navigate(nodes, instructions, "AAA", "ZZZ");
+  var path = findPath(nodes, instructions, "AAA", "ZZZ");
   assert(path.node === "ZZZ");
   return path.steps;
 }
@@ -22,7 +22,7 @@ function solve2(input) {
   var endNodes = _.keys(nodes).filter(isEndNode);
   assert(startNodes.length);
   var cycles = startNodes.map(function (startNode) {
-    var path = navigate(nodes, instructions, startNode);
+    var path = findPath(nodes, instructions, startNode);
     return findCycle(path, endNodes);
   });
   return _.lcm(cycles);
@@ -31,32 +31,28 @@ function solve2(input) {
 function parseNodes(lines) {
   return lines.reduce(function (nodes, line) {
     assert(regex1.test(line));
-    nodes[line.slice(0, 3)] = { L: line.slice(7, 10), R: line.slice(12, 15) };
+    nodes[line.slice(0, 3)] = {
+      L: line.slice(7, 10),
+      R: line.slice(12, 15)
+    };
     return nodes;
   }, {});
 }
 
-function navigate(nodes, instructions, startNode, endNode) {
-  var visits = _.keys(nodes).reduce(function (object, key) {
-    object[key] = [];
-    return object;
-  }, {});
+function findPath(nodes, instructions, startNode, endNode) {
+  var visits = _.map(nodes, function () {
+    return [];
+  });
   var node = startNode;
   var steps = 0;
   var cycle;
   while (node !== endNode && cycle === undefined) {
     visits[node].push(steps);
     node = nodes[node][instructions[steps++ % instructions.length]];
-    assert(nodes[node]);
-    cycle = _.find(visits[node], isEqualModulo(steps, instructions.length));
+    assert(node in nodes);
+    cycle = _.find(visits[node], _.equalsMod(steps, instructions.length));
   }
   return { node: node, steps: steps, cycle: cycle, visits: visits };
-}
-
-function isEqualModulo(value, modulus) {
-  return function (other) {
-    return (value - other) % modulus === 0;
-  };
 }
 
 function isStartNode(node) {

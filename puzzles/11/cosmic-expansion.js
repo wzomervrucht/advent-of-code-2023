@@ -18,13 +18,13 @@ function solve(input, expansion) {
   var galaxies = findGalaxies(input);
   var emptyRows = _.difference(_.range(input.length), galaxies.map(_.get("x")));
   var emptyCols = _.difference(_.range(input[0].length), galaxies.map(_.get("y")));
-  var total = 0;
+  var distance = 0;
   for (var i = 0; i < galaxies.length; i++) {
     for (var j = i + 1; j < galaxies.length; j++) {
-      total += getDistance(galaxies[i], galaxies[j], emptyRows, emptyCols, expansion);
+      distance += getDistance(galaxies[i], galaxies[j], emptyRows, emptyCols, expansion);
     }
   }
-  return total;
+  return distance;
 }
 
 function findGalaxies(input) {
