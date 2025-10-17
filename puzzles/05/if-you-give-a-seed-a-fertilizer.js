@@ -20,12 +20,12 @@ function solve2(input) {
 }
 
 function parseSeeds(lines) {
-  assert(lines.length === 1 && regex0.test(lines[0]));
+  assert(lines.length === 1 && lines[0].match(/^seeds:(?: \d+)+$/));
   return lines[0].match(/\d+/g).map(_.parseInt);
 }
 
 function parseSeedRanges(lines) {
-  assert(lines.length === 1 && regex0.test(lines[0]));
+  assert(lines.length === 1 && lines[0].match(/^seeds:(?: \d+ \d+)+$/));
   var numbers = lines[0].match(/\d+/g).map(_.parseInt);
   var ranges = [];
   for (var i = 0; i < numbers.length; i += 2) {
@@ -38,9 +38,9 @@ function parseSeedRanges(lines) {
 }
 
 function parseMap(lines) {
-  assert(lines.length >= 2 && regex1.test(lines[0]));
+  assert(lines.length >= 2 && lines[0].match(/^\w+-to-\w+ map:$/));
   var map = lines.slice(1).map(function (line) {
-    assert(regex2.test(line));
+    assert(line.match(/^\d+ \d+ \d+$/));
     var numbers = line.match(/\d+/g).map(_.parseInt);
     return {
       start: numbers[1],
@@ -92,10 +92,6 @@ function mapRanges(ranges, map) {
   });
   return mappedRanges;
 }
-
-var regex0 = /^seeds:(?: \d+ \d+)+$/;
-var regex1 = /^\w+-to-\w+ map:$/;
-var regex2 = /^\d+ \d+ \d+$/;
 
 module.exports = {
   day: 5,

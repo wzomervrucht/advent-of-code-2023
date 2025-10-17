@@ -4,17 +4,22 @@ var assert = require("../common/assert");
 var _ = require("../common/utils");
 
 function solve1(input) {
-  assert(_.isRectangular(input) && regex.test(input.join("")));
+  validate(input);
   var loop = findLoop(input);
   var pipes = loop.map(countPipes);
   return _.sum(pipes) / 2;
 }
 
 function solve2(input) {
-  assert(_.isRectangular(input) && regex.test(input.join("")));
+  validate(input);
   var loop = findLoop(input);
   var inner = loop.map(countInner);
   return _.sum(inner);
+}
+
+function validate(input) {
+  assert(_.isRectangular(input));
+  assert(input.join("").match(/^[|\-LJ7F.]*S[|\-LJ7F.]*$/));
 }
 
 function findLoop(grid) {
@@ -91,8 +96,6 @@ var directions = {
   S: { L: "E", "|": "S", J: "W" },
   W: { F: "S", "-": "W", L: "N" }
 };
-
-var regex = /^[|\-.7FJL]*S[|\-.7FJL]*$/;
 
 module.exports = {
   day: 10,

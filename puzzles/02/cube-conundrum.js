@@ -16,7 +16,7 @@ function solve2(input) {
 }
 
 function parseGame(line) {
-  assert(regex.test(line));
+  assert(line.match(/^Game \d+:(?: \d+ (red|green|blue)(?![^;]*\1)(?:[,;](?= )|$))+$/));
   return {
     id: parseInt(line.match(/\d+/)[0]),
     red: _.max((line.match(/\d+(?= red)/g) || ["0"]).map(_.parseInt)),
@@ -32,8 +32,6 @@ function isPossible(game) {
 function getPower(game) {
   return game.red * game.green * game.blue;
 }
-
-var regex = /^Game \d+:(?: \d+ (red|green|blue)(?![^;]*\1)(?:[,;](?=.)|$))+$/;
 
 module.exports = {
   day: 2,

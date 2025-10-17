@@ -18,7 +18,7 @@ function solve2(input) {
 }
 
 function parseHand(line) {
-  assert(regex.test(line));
+  assert(line.match(/^[2-9TJQKA]{5} \d+$/));
   return {
     cards: line.slice(0, 5).split(""),
     bid: parseInt(line.slice(6))
@@ -78,8 +78,6 @@ function getStrength(cards, joker) {
 function getWinnings(hand, index) {
   return hand.bid * (index + 1);
 }
-
-var regex = /^[2-9TJQKA]{5} \d+$/;
 
 module.exports = {
   day: 7,

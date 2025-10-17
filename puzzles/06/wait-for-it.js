@@ -4,7 +4,7 @@ var assert = require("../common/assert");
 var _ = require("../common/utils");
 
 function solve1(input) {
-  assert(input.length === 2 && regex0.test(input[0]) && regex1.test(input[1]));
+  validate(input);
   var times = input[0].match(/\d+/g).map(_.parseInt);
   var distances = input[1].match(/\d+/g).map(_.parseInt);
   assert(times.length === distances.length);
@@ -15,10 +15,15 @@ function solve1(input) {
 }
 
 function solve2(input) {
-  assert(input.length === 2 && regex0.test(input[0]) && regex1.test(input[1]));
+  validate(input);
   var time = parseInt(input[0].match(/\d+/g).join(""));
   var distance = parseInt(input[1].match(/\d+/g).join(""));
   return countOptions(time, distance);
+}
+
+function validate(input) {
+  assert(input.length === 2);
+  assert(input[0].match(/^Time:(?: +\d+)+$/) && input[1].match(/^Distance:(?: +\d+)+$/));
 }
 
 function countOptions(time, distance) {
@@ -29,9 +34,6 @@ function countOptions(time, distance) {
   max = _.isInteger(max) ? max - 1 : Math.floor(max);
   return max - min + 1;
 }
-
-var regex0 = /^Time:( +\d+)+$/;
-var regex1 = /^Distance:( +\d+)+$/;
 
 module.exports = {
   day: 6,

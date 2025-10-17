@@ -9,12 +9,11 @@ function solve1(input) {
 
 function solve2(input, config) {
   var expansion = config ? config.expansion : 1000000;
-  assert(typeof expansion === "number" && isFinite(expansion));
   return solve(input, expansion);
 }
 
 function solve(input, expansion) {
-  assert(_.isRectangular(input) && regex.test(input.join("")));
+  assert(_.isRectangular(input) && input.join("").match(/^[.#]+$/));
   var galaxies = findGalaxies(input);
   var emptyRows = _.difference(_.range(input.length), galaxies.map(_.get("x")));
   var emptyCols = _.difference(_.range(input[0].length), galaxies.map(_.get("y")));
@@ -45,8 +44,6 @@ function getDistance(a, b, emptyRows, emptyCols, expansion) {
   }).length;
   return Math.abs(b.x - a.x) + Math.abs(b.y - a.y) + (expansion - 1) * (rows + cols);
 }
-
-var regex = /^[.#]*$/;
 
 module.exports = {
   day: 11,

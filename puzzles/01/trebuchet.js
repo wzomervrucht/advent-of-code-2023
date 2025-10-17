@@ -22,14 +22,14 @@ function solve2(input) {
 }
 
 function findDigits(line) {
-  // a global regex would miss overlapping matches
+  // take care of overlapping matches
   var digits = [];
-  var start = 0;
-  var match = line.match(regex);
+  var regex = new RegExp("\\d|" + written.join("|"), "g");
+  var match = regex.exec(line);
   while (match) {
     digits.push(parseDigit(match[0]));
-    start += match.index + 1;
-    match = line.slice(start).match(regex);
+    regex.lastIndex = match.index + 1;
+    match = regex.exec(line);
   }
   return digits;
 }
@@ -39,7 +39,6 @@ function parseDigit(digit) {
 }
 
 var written = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
-var regex = new RegExp("\\d|" + written.join("|"));
 
 module.exports = {
   day: 1,

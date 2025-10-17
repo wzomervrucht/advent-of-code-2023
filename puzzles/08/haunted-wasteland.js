@@ -5,7 +5,7 @@ var assume = require("../common/assume");
 var _ = require("../common/utils");
 
 function solve1(input) {
-  assert(regex0.test(input[0]) && input[1] === "");
+  validate(input.slice(0, 2));
   var instructions = input[0];
   var nodes = parseNodes(input.slice(2));
   assert("AAA" in nodes);
@@ -15,7 +15,7 @@ function solve1(input) {
 }
 
 function solve2(input) {
-  assert(regex0.test(input[0]) && input[1] === "");
+  validate(input.slice(0, 2));
   var instructions = input[0];
   var nodes = parseNodes(input.slice(2));
   var startNodes = _.keys(nodes).filter(isStartNode);
@@ -28,9 +28,14 @@ function solve2(input) {
   return _.lcm(cycles);
 }
 
+function validate(lines) {
+  assert(lines.length === 2);
+  assert(lines[0].match(/^[LR]+$/) && lines[1] === "");
+}
+
 function parseNodes(lines) {
   return lines.reduce(function (nodes, line) {
-    assert(regex1.test(line));
+    assert(line.match(/^\w{3} = \(\w{3}, \w{3}\)$/));
     nodes[line.slice(0, 3)] = {
       L: line.slice(7, 10),
       R: line.slice(12, 15)
@@ -72,9 +77,6 @@ function findCycle(path, endNodes) {
   assume(_.first(ends) >= path.cycle && _.last(ends) === path.steps - path.cycle);
   return ends[0];
 }
-
-var regex0 = /^[LR]+$/;
-var regex1 = /^\w{3} = \(\w{3}, \w{3}\)$/;
 
 module.exports = {
   day: 8,

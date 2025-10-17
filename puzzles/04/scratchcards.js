@@ -15,6 +15,7 @@ function solve2(input) {
   var matches = cards.map(countMatches);
   var copies = cards.map(_.constant(1));
   for (var i = 0; i < cards.length; i++) {
+    assert(cards[i].id === i + 1);
     assert(i + matches[i] < cards.length);
     for (var j = i + 1; j <= i + matches[i]; j++) {
       copies[j] += copies[i];
@@ -24,10 +25,11 @@ function solve2(input) {
 }
 
 function parseCard(line) {
-  assert(regex.test(line));
+  assert(line.match(/^Card +\d+:(?: +\d+)+ +\|(?: +\d+)+$/));
   var i = line.indexOf(":");
   var j = line.indexOf("|");
   return {
+    id: parseInt(line.match(/\d+/)[0]),
     winning: line.slice(i, j).match(/\d+/g).map(_.parseInt),
     numbers: line.slice(j).match(/\d+/g).map(_.parseInt)
   };
@@ -42,8 +44,6 @@ function countMatches(card) {
 function getPoints(matches) {
   return matches ? Math.pow(2, matches - 1) : 0;
 }
-
-var regex = /^Card +\d+:(?: +\d+)+ \|(?: +\d+)+$/;
 
 module.exports = {
   day: 4,

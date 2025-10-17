@@ -16,7 +16,7 @@ function solve2(input) {
 }
 
 function parseHistory(line) {
-  assert(regex.test(line));
+  assert(line.match(/^-?\d+(?: -?\d+)*$/));
   return line.match(/-?\d+/g).map(_.parseInt);
 }
 
@@ -49,8 +49,6 @@ function getDifferences(sequence) {
     return sequence[i + 1] - sequence[i];
   });
 }
-
-var regex = /^-?\d+(?: -?\d+)*$/;
 
 module.exports = {
   day: 9,
