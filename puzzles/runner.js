@@ -64,7 +64,7 @@ function parseArgs(options) {
     var match = arg.match(regex);
     match || throwError("Unexpected argument '%s'", arg);
     args[match[1]] = match[2];
-  return args;
+    return args;
   }, {});
 }
 
