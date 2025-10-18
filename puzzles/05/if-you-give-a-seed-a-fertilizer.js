@@ -7,39 +7,55 @@ function solve1(input) {
   var chunks = _.split(input, "");
   var seeds = parseSeeds(chunks[0]);
   var maps = chunks.slice(1).map(parseMap);
-  var locations = maps.reduce(mapItems, seeds);
-  return _.min(locations);
+  var target = maps.reduce(mapItems, seeds);
+  assert(target.category === "location");
+  return _.min(target.items);
 }
 
 function solve2(input) {
   var chunks = _.split(input, "");
   var seeds = parseSeedRanges(chunks[0]);
   var maps = chunks.slice(1).map(parseMap);
-  var locations = maps.reduce(mapRanges, seeds);
-  return _.min(locations.map(_.get("start")));
+  var target = maps.reduce(mapRanges, seeds);
+  assert(target.category === "location");
+  return _.min(target.ranges.map(_.get("start")));
 }
 
 function parseSeeds(lines) {
   assert(lines.length === 1 && lines[0].match(/^seeds:(?: \d+)+$/));
-  return lines[0].match(/\d+/g).map(_.parseInt);
+  return {
+    category: "seed",
+    items: lines[0].match(/\d+/g).map(_.parseInt)
+  };
 }
 
 function parseSeedRanges(lines) {
   assert(lines.length === 1 && lines[0].match(/^seeds:(?: \d+ \d+)+$/));
   var numbers = lines[0].match(/\d+/g).map(_.parseInt);
-  var ranges = [];
-  for (var i = 0; i < numbers.length; i += 2) {
-    ranges.push({
-      start: numbers[i],
-      end: numbers[i] + numbers[i + 1]
-    });
-  }
-  return ranges;
+  var ranges = _.range(numbers.length / 2).map(function (i) {
+    return {
+      start: numbers[2 * i],
+      end: numbers[2 * i] + numbers[2 * i + 1]
+    };
+  });
+  return {
+    category: "seed",
+    ranges: ranges
+  };
 }
 
 function parseMap(lines) {
   assert(lines.length >= 2 && lines[0].match(/^\w+-to-\w+ map:$/));
-  var map = lines.slice(1).map(function (line) {
+  var words = lines[0].match(/\w+/g);
+  return {
+    source: words[0],
+    destination: words[2],
+    rules: parseRules(lines.slice(1))
+  };
+}
+
+function parseRules(lines) {
+  var rules = lines.map(function (line) {
     assert(line.match(/^\d+ \d+ \d+$/));
     var numbers = line.match(/\d+/g).map(_.parseInt);
     return {
@@ -48,49 +64,62 @@ function parseMap(lines) {
       offset: numbers[0] - numbers[1]
     };
   });
-  _.sort(map, _.get("start"));
+  _.sort(rules, _.get("start"));
 
-  // insert offset 0 map ranges in the gaps
-  for (var i = 1; i < map.length; i++) {
-    assert(map[i - 1].end <= map[i].start);
-    if (map[i - 1].end < map[i].start) {
-      map.splice(i, 0, {
-        start: map[i - 1].end,
-        end: map[i].start,
+  // insert offset 0 rules in the gaps
+  for (var i = 1; i < rules.length; i++) {
+    assert(rules[i - 1].end <= rules[i].start);
+    if (rules[i - 1].end < rules[i].start) {
+      rules.splice(i, 0, {
+        start: rules[i - 1].end,
+        end: rules[i].start,
         offset: 0
       });
     }
   }
-  map.unshift({ start: -Infinity, end: _.first(map).start, offset: 0 });
-  map.push({ start: _.last(map).end, end: Infinity, offset: 0 });
+  rules.unshift({ start: -Infinity, end: _.first(rules).start, offset: 0 });
+  rules.push({ start: _.last(rules).end, end: Infinity, offset: 0 });
 
-  return map;
+  return rules;
 }
 
-function mapItems(items, map) {
-  return items.map(function (item) {
-    var i = _.findIndex(map, function (m) {
-      return item < m.end;
-    });
-    return item + map[i].offset;
-  });
+function mapItems(resource, map) {
+  assert(resource.category === map.source);
+  return {
+    category: map.destination,
+    items: resource.items.map(mapItem(map))
+  };
 }
 
-function mapRanges(ranges, map) {
-  var mappedRanges = [];
-  ranges.forEach(function (range) {
-    var i = _.findIndex(map, function (m) {
-      return range.start < m.end;
+function mapItem(map) {
+  return function (item) {
+    var rule = _.find(map.rules, function (r) {
+      return item < r.end;
     });
-    while (map[i] && map[i].start < range.end) {
-      mappedRanges.push({
-        start: _.max(map[i].start, range.start) + map[i].offset,
-        end: _.min(map[i].end, range.end) + map[i].offset
-      });
-      i++;
-    }
-  });
-  return mappedRanges;
+    return item + rule.offset;
+  };
+}
+
+function mapRanges(resource, map) {
+  assert(resource.category === map.source);
+  return {
+    category: map.destination,
+    ranges: _.flat(resource.ranges.map(mapRange(map)))
+  };
+}
+
+function mapRange(map) {
+  return function (range) {
+    var rules = map.rules.filter(function (rule) {
+      return range.start < rule.end && rule.start < range.end;
+    });
+    return rules.map(function (rule) {
+      return {
+        start: _.max(rule.start, range.start) + rule.offset,
+        end: _.min(rule.end, range.end) + rule.offset
+      };
+    });
+  };
 }
 
 module.exports = {
