@@ -44,22 +44,6 @@ function parseNodes(lines) {
   }, {});
 }
 
-function findPath(nodes, instructions, startNode, endNode) {
-  var visits = _.map(nodes, function () {
-    return [];
-  });
-  var node = startNode;
-  var steps = 0;
-  var cycle;
-  while (node !== endNode && cycle === undefined) {
-    visits[node].push(steps);
-    node = nodes[node][instructions[steps++ % instructions.length]];
-    assert(node in nodes);
-    cycle = _.find(visits[node], _.equalsMod(steps, instructions.length));
-  }
-  return { node: node, steps: steps, cycle: cycle, visits: visits };
-}
-
 function isStartNode(node) {
   return node[2] === "A";
 }
@@ -68,13 +52,30 @@ function isEndNode(node) {
   return node[2] === "Z";
 }
 
+function findPath(nodes, instructions, startNode, endNode) {
+  var visits = _.map(nodes, function () {
+    return [];
+  });
+  var node = startNode;
+  var steps = 0;
+  var loop;
+  while (node !== endNode && loop === undefined) {
+    visits[node].push(steps);
+    node = nodes[node][instructions[steps++ % instructions.length]];
+    assert(node in nodes);
+    loop = _.find(visits[node], _.equalsMod(steps, instructions.length));
+  }
+  return { node: node, steps: steps, loop: loop, visits: visits };
+}
+
 function findCycle(path, endNodes) {
+  var loop = { start: path.loop, length: path.steps - path.loop };
   // step numbers at which an end node is reached
   var ends = _.sort(_.flat(endNodes.map(_.evaluate(path.visits))));
   assert(ends.length);
   // apparently, this occurs at every multiple of ends[0] steps
   assume(ends.length === 1 || (ends.length === 2 && ends[1] === 2 * ends[0]));
-  assume(_.first(ends) >= path.cycle && _.last(ends) === path.steps - path.cycle);
+  assume(_.first(ends) >= loop.start && _.last(ends) === loop.length);
   return ends[0];
 }
 
