@@ -11,5 +11,6 @@ module.exports = [
   require("./08/haunted-wasteland"),
   require("./09/mirage-maintenance"),
   require("./10/pipe-maze"),
-  require("./11/cosmic-expansion")
+  require("./11/cosmic-expansion"),
+  require("./12/hot-springs")
 ];
