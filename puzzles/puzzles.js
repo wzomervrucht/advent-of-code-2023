@@ -12,5 +12,6 @@ module.exports = [
   require("./09/mirage-maintenance"),
   require("./10/pipe-maze"),
   require("./11/cosmic-expansion"),
-  require("./12/hot-springs")
+  require("./12/hot-springs"),
+  require("./13/point-of-incidence")
 ];
