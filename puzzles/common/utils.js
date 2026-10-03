@@ -14,6 +14,12 @@ function constant(value) {
   };
 }
 
+function count(array, callback) {
+  return array.reduce(function (n, value) {
+    return callback(value) ? n + 1 : n;
+  }, 0);
+}
+
 function difference(array, values) {
   return array.filter(function (value) {
     return values.indexOf(value) === -1;
@@ -67,7 +73,7 @@ function flat(array) {
 
 // expects a non-empty list of positive integers
 function gcd() {
-  var values = sort(args(arguments));
+  var values = sort(args(arguments).slice());
   while (values.length > 1) {
     var r = values.pop() % values[0];
     r && values.unshift(r);
@@ -199,6 +205,7 @@ function unique(array) {
 
 module.exports = {
   constant: constant,
+  count: count,
   difference: difference,
   equals: equals,
   equalsMod: equalsMod,

@@ -36,12 +36,12 @@ function findGalaxies(input) {
 }
 
 function getDistance(a, b, emptyRows, emptyCols, expansion) {
-  var rows = emptyRows.filter(function (x) {
+  var rows = _.count(emptyRows, function (x) {
     return (a.x < x && x < b.x) || (b.x < x && x < a.x);
-  }).length;
-  var cols = emptyCols.filter(function (y) {
+  });
+  var cols = _.count(emptyCols, function (y) {
     return (a.y < y && y < b.y) || (b.y < y && y < a.y);
-  }).length;
+  });
   return Math.abs(b.x - a.x) + Math.abs(b.y - a.y) + (expansion - 1) * (rows + cols);
 }
 

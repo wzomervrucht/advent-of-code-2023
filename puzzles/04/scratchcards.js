@@ -36,9 +36,9 @@ function parseCard(line) {
 }
 
 function countMatches(card) {
-  return card.numbers.filter(function (number) {
+  return _.count(card.numbers, function (number) {
     return _.includes(card.winning, number);
-  }).length;
+  });
 }
 
 function getPoints(matches) {

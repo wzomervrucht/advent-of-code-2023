@@ -73,7 +73,7 @@ function findNext(grid, position) {
 }
 
 function countPipes(row) {
-  return row.filter(_.identity).length;
+  return _.count(row, _.identity);
 }
 
 function countInner(row) {

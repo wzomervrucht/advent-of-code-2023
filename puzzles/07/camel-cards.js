@@ -36,10 +36,10 @@ function sortHands(hands, joker) {
 }
 
 function getType(cards, joker) {
-  var jokers = joker ? cards.filter(_.equals("J")).length : 0;
+  var jokers = joker ? _.count(cards, _.equals("J")) : 0;
   var others = joker ? _.difference(cards, ["J"]) : cards;
   var counts = _.unique(others).map(function (card) {
-    return others.filter(_.equals(card)).length;
+    return _.count(others, _.equals(card));
   });
   switch (_.max(counts.concat(0)) + jokers) {
     case 5:
