@@ -13,5 +13,6 @@ module.exports = [
   require("./10/pipe-maze"),
   require("./11/cosmic-expansion"),
   require("./12/hot-springs"),
-  require("./13/point-of-incidence")
+  require("./13/point-of-incidence"),
+  require("./14/parabolic-reflector-dish")
 ];
