@@ -14,5 +14,6 @@ module.exports = [
   require("./11/cosmic-expansion"),
   require("./12/hot-springs"),
   require("./13/point-of-incidence"),
-  require("./14/parabolic-reflector-dish")
+  require("./14/parabolic-reflector-dish"),
+  require("./15/lens-library")
 ];

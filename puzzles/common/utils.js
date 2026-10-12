@@ -152,6 +152,12 @@ function min() {
   return Math.min.apply(Math, args(arguments));
 }
 
+function nullary(callback) {
+  return function () {
+    return callback();
+  };
+}
+
 function product(values) {
   return values.reduce(function (x, y) {
     return x * y;
@@ -229,6 +235,7 @@ module.exports = {
   matchAll: matchAll,
   max: max,
   min: min,
+  nullary: nullary,
   parseInt: unary(parseInt),
   product: product,
   range: range,
