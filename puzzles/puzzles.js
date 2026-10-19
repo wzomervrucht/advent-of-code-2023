@@ -15,5 +15,6 @@ module.exports = [
   require("./12/hot-springs"),
   require("./13/point-of-incidence"),
   require("./14/parabolic-reflector-dish"),
-  require("./15/lens-library")
+  require("./15/lens-library"),
+  require("./16/the-floor-will-be-lava")
 ];
