@@ -16,5 +16,6 @@ module.exports = [
   require("./13/point-of-incidence"),
   require("./14/parabolic-reflector-dish"),
   require("./15/lens-library"),
-  require("./16/the-floor-will-be-lava")
+  require("./16/the-floor-will-be-lava"),
+  require("./17/clumsy-crucible")
 ];
